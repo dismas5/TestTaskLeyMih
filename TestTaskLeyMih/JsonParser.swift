@@ -1,34 +1,4 @@
 import Foundation
-import UIKit
-
-let JsonLink = "https://rickandmortyapi.com/api/character/"
-
-struct ApiInfo: Decodable {
-    let count: Int
-    let pages: Int
-    let next: URL?
-    let prev: URL?
-}
-
-struct Character: Decodable {
-    //TODO: Add origin and location
-    
-    let id: Int
-    let name: String
-    let status: String
-    let species: String
-    let type: String
-    let gender: String
-    let image: URL
-    let episode: [URL]
-    let url: URL
-    let created: String
-}
-
-struct RawData: Decodable {
-    let info: ApiInfo
-    let results: [Character]
-}
 
 class DataParser {
     
@@ -40,6 +10,7 @@ class DataParser {
     
     public var characters: [Character]
     private var pagesAmount: Int
+    let JsonLink = "https://rickandmortyapi.com/api/character/"
     
     func printData() {
         print(characters.count)
@@ -54,7 +25,7 @@ class DataParser {
     
     func parseData() {
         for i in 1...self.pagesAmount {
-            if let url = URL(string: JsonLink + "?page=\(i)") {
+            if let url = URL(string: self.JsonLink + "?page=\(i)") {
                 URLSession.shared.dataTask(with: url) { [self] data, _, error in
                     if let data = data {
                     do {

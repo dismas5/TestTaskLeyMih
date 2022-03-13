@@ -12,5 +12,4 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var IdLabel: UILabel!
     @IBOutlet weak var CharacterImageView: UIImageView!
     @IBOutlet weak var CharacterLabel: UILabel!
-    @IBOutlet weak var ActionButton: UIButton!
 }
