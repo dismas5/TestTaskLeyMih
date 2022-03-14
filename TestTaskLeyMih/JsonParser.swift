@@ -3,24 +3,22 @@ import Foundation
 class DataParser {
     
     init() {
-        characters = [Character]()
+        JsonLink = ""
+        pagesAmount = 0
         //TODO: Get information about pages automatically, not by entering Int number
-        pagesAmount = 42
     }
     
-    public var characters: [Character]
+    init(link: String, pages: Int) {
+        JsonLink = link
+        pagesAmount = pages
+    }
+    
+    public var characters: [Character] = [Character]()
     private var pagesAmount: Int
-    let JsonLink = "https://rickandmortyapi.com/api/character/"
+    private var JsonLink: String
     
-    func printData() {
-        print(characters.count)
-        for character in characters {
-            print("\(character.id) \(character.name)")
-        }
-    }
-    
-    func getCharactersAmount() -> Int {
-        return characters.count
+    func getCharacters() -> [Character] {
+        return characters
     }
     
     func parseData() {
@@ -38,29 +36,5 @@ class DataParser {
                 }.resume()
             }
         }
-    }
-    
-    func getCharacterById(_ id: Int) -> Character {
-        return characters[id]
-    }
-    
-    func getCharacterInfo(_ character: Character) {
-        //TODO: Add origin and location
-        
-        print("Id: \(character.id)")
-        print("Name: \(character.name)")
-        print("Status: \(character.status)")
-        print("Species: \(character.species)")
-        print("Type: \(character.type)")
-        print("Gender: \(character.gender)")
-        print("Image: \(character.image)")
-        
-        print("List of episodes:")
-        for episode in character.episode {
-            print(episode)
-        }
-        
-        print("URL: \(character.url)")
-        print("Created: \(character.created)")
     }
 }

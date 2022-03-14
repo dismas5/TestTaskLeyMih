@@ -1,17 +1,22 @@
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    let parser = DataParser()
+    let parser = DataParser(link: "https://rickandmortyapi.com/api/character/", pages: 42)
     let characterScreen = CharacterScreen()
+    
     var characterToSegue: Character?
+    var characters: [Character] = []
+    var copiedCharacters: [Character] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         parser.parseData()
         sleep(1)
+        characters = parser.getCharacters()
+        copiedCharacters = characters
         //TODO: Make it run sync, without sleep(1)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -19,13 +24,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return parser.getCharactersAmount()
+        return characters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
-        let character = parser.getCharacterById(indexPath.item)
+        let character = characters[indexPath.item]
+        
         if let image = character.getImagefromURL() {
             print("Character \(indexPath.item) is displayed!")
             cell.CharacterImageView.image = image
@@ -33,7 +38,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         cell.CharacterLabel.text = character.name
         cell.IdLabel.text = String(character.id)
-          
+        
         var color: UIColor = UIColor.systemGray
         switch(character.status) {
         case "Dead":
@@ -50,9 +55,35 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let searchView: UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "SearchBar", for: indexPath)
+        
+        return searchView
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.characters.removeAll()
+        
+        if (searchBar.text!.isEmpty) {
+            self.characters = self.copiedCharacters
+            self.collectionView.reloadData()
+            return
+        }
+        
+        for character in copiedCharacters {
+            if (character.name.lowercased().contains(searchBar.text!.lowercased())) {
+                self.characters.append(character)
+            }
+        }
+        self.collectionView.reloadData()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if (collectionView.cellForItem(at: indexPath) as? CollectionViewCell) != nil {
-            characterToSegue = parser.getCharacterById(indexPath.item)
+            characterToSegue = characters[indexPath.item]
+        }
+        if characters[indexPath.item].id == 9 {
+            collectionView.reloadData()
         }
         performSegue(withIdentifier: "segue", sender: self)
     }
