@@ -21,15 +21,6 @@ struct Character: Decodable {
     let episode: [URL]
     let url: URL
     let created: String
-    
-    func getImagefromURL() -> UIImage? {
-        if let data = try? Data(contentsOf: self.image) {
-            if let image = UIImage(data: data) {
-                return image
-            }
-        }
-        return nil
-    }
 }
 
 struct RawData: Decodable {

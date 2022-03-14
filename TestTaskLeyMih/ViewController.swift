@@ -31,9 +31,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         let character = characters[indexPath.item]
         
-        if let image = character.getImagefromURL() {
-            print("Character \(indexPath.item) is displayed!")
-            cell.CharacterImageView.image = image
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: character.image)
+            DispatchQueue.main.async {
+                cell.CharacterImageView.image = UIImage(data: data!)
+            }
         }
         
         cell.CharacterLabel.text = character.name
