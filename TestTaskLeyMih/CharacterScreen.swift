@@ -3,14 +3,14 @@ import UIKit
 
 class CharacterScreen: UIViewController {
     
-    @IBOutlet weak var CharacterPicture: UIImageView!
-    @IBOutlet weak var CharacterName: UILabel!
-    @IBOutlet weak var IdLabel: UILabel!
-    @IBOutlet weak var StatusLabel: UILabel!
-    @IBOutlet weak var SpeciesLabel: UILabel!
-    @IBOutlet weak var TypeLabel: UILabel!
-    @IBOutlet weak var GenderLabel: UILabel!
-    @IBOutlet weak var CreatedLabel: UILabel!
+    @IBOutlet weak var characterPicture: UIImageView!
+    @IBOutlet weak var characterName: UILabel!
+    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var speciesLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var createdLabel: UILabel!
     
     var character: Character?
     
@@ -18,16 +18,16 @@ class CharacterScreen: UIViewController {
         if character != nil {
             if let data = try? Data(contentsOf: character!.image) {
                 if let image = UIImage(data: data) {
-                    CharacterPicture.image = image
+                    characterPicture.image = image
                 }
             }
-            CharacterName.text = character?.name
-            IdLabel.text! += String(character!.id)
-            StatusLabel.text! += String(character!.status)
-            SpeciesLabel.text! += String(character!.species)
-            TypeLabel.text! += String(character!.type)
-            GenderLabel.text! += String(character!.gender)
-            CreatedLabel.text! += String(character!.created)
+            characterName.text = character?.name
+            idLabel.text! += String(character!.id)
+            statusLabel.text! += String(character!.status)
+            speciesLabel.text! += String(character!.species)
+            typeLabel.text! += String(character!.type)
+            genderLabel.text! += String(character!.gender)
+            createdLabel.text! += String(character!.created)
 
 //            print("List of episodes:")
 //            for episode in character.episode {

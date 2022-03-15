@@ -23,7 +23,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="TNw-Gc-Jqo">
                                     <size key="itemSize" width="130" height="170"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -60,9 +60,9 @@
                                             <constraint firstItem="GOU-6Z-Czw" firstAttribute="top" secondItem="yjX-eI-dkL" secondAttribute="top" constant="5" id="gJe-Fx-WGg"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="CharacterImageView" destination="VqH-8V-sI2" id="1Xp-ZB-yXD"/>
-                                            <outlet property="CharacterLabel" destination="mCM-C1-Ljt" id="esa-CE-SKr"/>
-                                            <outlet property="IdLabel" destination="GOU-6Z-Czw" id="NWj-V9-SjW"/>
+                                            <outlet property="characterImageView" destination="VqH-8V-sI2" id="1Xp-ZB-yXD"/>
+                                            <outlet property="characterLabel" destination="mCM-C1-Ljt" id="esa-CE-SKr"/>
+                                            <outlet property="idLabel" destination="GOU-6Z-Czw" id="NWj-V9-SjW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -75,12 +75,25 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
-                                                <outlet property="delegate" destination="BYZ-38-t0r" id="j8i-ZT-nkf"/>
+                                                <outlet property="delegate" destination="BYZ-38-t0r" id="jQ0-w4-3v9"/>
                                             </connections>
                                         </searchBar>
                                     </subviews>
                                     <connections>
                                         <outlet property="searchBar" destination="hcE-bC-HUo" id="Qd8-42-5TY"/>
+                                    </connections>
+                                </collectionReusableView>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="loadingView" id="Pgb-Ro-6ci" customClass="LoadingBarView" customModule="TestTaskLeyMih" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="220" width="428" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="FcC-oD-yE2">
+                                            <rect key="frame" x="204" y="13" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <connections>
+                                        <outlet property="activityIndicator" destination="FcC-oD-yE2" id="uZU-cq-2ro"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
@@ -170,14 +183,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="CharacterName" destination="j3l-1c-mmt" id="er7-ma-EAL"/>
-                        <outlet property="CharacterPicture" destination="am9-as-qB4" id="MYJ-fz-z5c"/>
-                        <outlet property="CreatedLabel" destination="3xs-Go-oZi" id="bRo-0r-Qte"/>
-                        <outlet property="GenderLabel" destination="kvr-bR-0sB" id="Mzv-or-nyV"/>
-                        <outlet property="IdLabel" destination="Vli-zO-25m" id="ySQ-4Z-9wq"/>
-                        <outlet property="SpeciesLabel" destination="0A7-Z0-iYQ" id="FPy-aY-gPc"/>
-                        <outlet property="StatusLabel" destination="yep-Hu-f8X" id="eWC-Tg-EVQ"/>
-                        <outlet property="TypeLabel" destination="RJd-mc-wDH" id="D9N-dA-QUj"/>
+                        <outlet property="characterName" destination="j3l-1c-mmt" id="er7-ma-EAL"/>
+                        <outlet property="characterPicture" destination="am9-as-qB4" id="MYJ-fz-z5c"/>
+                        <outlet property="createdLabel" destination="3xs-Go-oZi" id="bRo-0r-Qte"/>
+                        <outlet property="genderLabel" destination="kvr-bR-0sB" id="Mzv-or-nyV"/>
+                        <outlet property="idLabel" destination="Vli-zO-25m" id="ySQ-4Z-9wq"/>
+                        <outlet property="speciesLabel" destination="0A7-Z0-iYQ" id="FPy-aY-gPc"/>
+                        <outlet property="statusLabel" destination="yep-Hu-f8X" id="eWC-Tg-EVQ"/>
+                        <outlet property="typeLabel" destination="RJd-mc-wDH" id="D9N-dA-QUj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fvt-8B-VYi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

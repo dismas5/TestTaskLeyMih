@@ -15,7 +15,7 @@
 		841CD25227D7DC4800F636FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841CD25027D7DC4800F636FF /* LaunchScreen.storyboard */; };
 		841CD25A27D7DDDC00F636FF /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CD25927D7DDDC00F636FF /* JsonParser.swift */; };
 		843ED45327DA7BF1003A350A /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843ED45227DA7BF1003A350A /* CollectionViewCell.swift */; };
-		847A72B827DF413A004967A5 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A72B727DF413A004967A5 /* SearchBarView.swift */; };
+		847A72B827DF413A004967A5 /* TopAndBottomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A72B727DF413A004967A5 /* TopAndBottomViews.swift */; };
 		8480F7A027DE4917009A8925 /* DecodableStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480F79F27DE4917009A8925 /* DecodableStructs.swift */; };
 		849F692727DD2989000BBAC2 /* CharacterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849F692627DD2989000BBAC2 /* CharacterScreen.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +31,7 @@
 		841CD25327D7DC4800F636FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		841CD25927D7DDDC00F636FF /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		843ED45227DA7BF1003A350A /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		847A72B727DF413A004967A5 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		847A72B727DF413A004967A5 /* TopAndBottomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAndBottomViews.swift; sourceTree = "<group>"; };
 		8480F79F27DE4917009A8925 /* DecodableStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableStructs.swift; sourceTree = "<group>"; };
 		849F692627DD2989000BBAC2 /* CharacterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +66,7 @@
 		841CD24427D7DC4700F636FF /* TestTaskLeyMih */ = {
 			isa = PBXGroup;
 			children = (
-				847A72B727DF413A004967A5 /* SearchBarView.swift */,
+				847A72B727DF413A004967A5 /* TopAndBottomViews.swift */,
 				8480F79F27DE4917009A8925 /* DecodableStructs.swift */,
 				841CD24527D7DC4700F636FF /* AppDelegate.swift */,
 				841CD24727D7DC4700F636FF /* SceneDelegate.swift */,
@@ -154,7 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843ED45327DA7BF1003A350A /* CollectionViewCell.swift in Sources */,
-				847A72B827DF413A004967A5 /* SearchBarView.swift in Sources */,
+				847A72B827DF413A004967A5 /* TopAndBottomViews.swift in Sources */,
 				841CD24A27D7DC4700F636FF /* ViewController.swift in Sources */,
 				841CD24627D7DC4700F636FF /* AppDelegate.swift in Sources */,
 				849F692727DD2989000BBAC2 /* CharacterScreen.swift in Sources */,
