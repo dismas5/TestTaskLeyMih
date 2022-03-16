@@ -43,7 +43,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func update(_ i: Int) {
         isHidden = i >= characters.count
-        loadedImages += i
+        loadedImages = i
         collectionView.reloadData()
     }
     
@@ -203,7 +203,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     //This activates before adding a cell
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let borderToUpload: Int = (characters == copiedCharacters ? images.count : loadedImages) - 1
-
+//        print(indexPath.item, loadedImages, characters.count)
         if (indexPath.item == borderToUpload) && !self.isHidden {
             var i = indexPath.item
             let end = i + 21
