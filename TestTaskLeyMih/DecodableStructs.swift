@@ -8,7 +8,7 @@ struct ApiInfo: Decodable {
     let prev: URL?
 }
 
-struct Character: Decodable {
+struct Character: Decodable, Hashable {
     //TODO: Add origin and location
     
     let id: Int
