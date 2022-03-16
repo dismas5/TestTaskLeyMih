@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -10,49 +10,93 @@ class ViewController: UIViewController {
     var characterToSegue: Character?
     var characters: [Character] = []
     var copiedCharacters: [Character] = []
-    var isLoading: Bool = false
-    var images = [UIImage?]()
+    var isHidden: Bool = false
+    var images: [Character: UIImage] = [:]
+    var loadedImages: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        loadData()
-    }
-    
-    func loadData() {
         //idk what does this line mean but without it characters upload slowier
         collectionView.collectionViewLayout.invalidateLayout()
-        
         parser.parseData()
         sleep(1)
         characters = parser.getCharacters()
         copiedCharacters = characters
 
-        for i in 0...20 {
-            print("Picture \(i) was loaded")
+        loadData()
+    }
+    
+    func loadData() {
+        var i: Int = 0
+        while i <= 20 && i < characters.count {
+            print("Pic \(i): \(characters[i].name)")
             let data = try? Data(contentsOf: characters[i].image)
-            self.images.append(UIImage(data: data!))
+            self.images[characters[i]] = UIImage(data: data!)
+            i += 1
         }
-        self.collectionView.reloadData()
+
+        update(i)
+    }
+    
+    func update(_ i: Int) {
+        isHidden = i >= characters.count
+        loadedImages += i
+        collectionView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.characters.removeAll()
-        
         if (searchBar.text!.isEmpty) {
             self.characters = self.copiedCharacters
             self.collectionView.reloadData()
             return
         }
         
+        self.characters.removeAll()
+        loadedImages = 0
+        
+        let searchBarText = searchBar.text!.components(separatedBy: ":")
+        
         for character in copiedCharacters {
-            if (character.name.lowercased().contains(searchBar.text!.lowercased())) {
-                self.characters.append(character)
+            if searchBarText.count <= 1 {
+                if (character.name.lowercased().contains(searchBarText[0].lowercased())) {
+                    self.characters.append(character)
+                }
+                continue
+            }
+            
+            switch searchBarText[0].lowercased() {
+            case "name":
+                if character.name.lowercased().contains(searchBarText[1].lowercased()) {
+                    self.characters.append(character)
+                }
+            case "status":
+                if character.status.lowercased().contains(searchBarText[1].lowercased()) {
+                    self.characters.append(character)
+                }
+            case "species":
+                if character.species.lowercased().contains(searchBarText[1].lowercased()) {
+                    self.characters.append(character)
+                }
+            case "type":
+                if character.type.lowercased().contains(searchBarText[1].lowercased()) {
+                    self.characters.append(character)
+                }
+            case "gender":
+                if character.gender.lowercased() == searchBarText[1].lowercased() {
+                    self.characters.append(character)
+                }
+            case "created":
+                if character.created.lowercased().contains(searchBarText[1].lowercased()) {
+                    self.characters.append(character)
+                }
+            default:
+                break
             }
         }
-        self.collectionView.reloadData()
+        loadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -102,17 +146,20 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     //This is required to get amount of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        if characters == copiedCharacters {
+            return images.count
+        }
+        return loadedImages
     }
     
-    //This activates when you see some element
+    //This activates when you see a reusable view
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionFooter {
             self.loadingView?.activityIndicator.startAnimating()
         }
     }
 
-    //This activates when you stop seeing any element
+    //This activates when you stop seeing a reusable view
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionFooter {
             self.loadingView?.activityIndicator.stopAnimating()
@@ -124,7 +171,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         let character = characters[indexPath.item]
         
-        cell.characterImageView.image = images[indexPath.item]
+        cell.characterImageView.image = images[character]
         cell.characterLabel.text = character.name
         cell.idLabel.text = String(character.id)
         
@@ -146,7 +193,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     //This is required for setting size of footer
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if self.isLoading {
+        if self.isHidden {
             return CGSize.zero
         } else {
             return CGSize(width: collectionView.bounds.width, height: 60)
@@ -155,20 +202,22 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     //This activates before adding a cell
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == images.count - 1 && !self.isLoading {
-            self.isLoading = true
-            let start = images.count
-            let end = start + 20
+        let borderToUpload: Int = (characters == copiedCharacters ? images.count : loadedImages) - 1
+
+        if (indexPath.item == borderToUpload) && !self.isHidden {
+            var i = indexPath.item
+            let end = i + 21
             
-            DispatchQueue.global().async {
-                for i in start...end {
-                    print("Picture \(i) was loaded")
-                    let data = try? Data(contentsOf: self.characters[i].image)
-                    self.images.append(UIImage(data: data!))
+            DispatchQueue.global().async { [self] in
+                while i <= end && i < characters.count {
+                    print("Pic \(i) with id \(characters[i].id)")
+                    let data = try? Data(contentsOf: characters[i].image)
+                    images[characters[i]] = UIImage(data: data!)
+                    
+                    i += 1
                 }
                 DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    self.isLoading = false
+                    update(i)
                 }
             }
         }
