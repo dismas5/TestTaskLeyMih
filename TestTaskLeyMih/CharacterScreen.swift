@@ -13,13 +13,12 @@ class CharacterScreen: UIViewController {
     @IBOutlet weak var createdLabel: UILabel!
     
     var character: Character?
+    var image: UIImage?
     
     override func viewDidLoad() {
         if character != nil {
-            if let data = try? Data(contentsOf: character!.image) {
-                if let image = UIImage(data: data) {
-                    characterPicture.image = image
-                }
+            if let image = image {
+                characterPicture.image = image
             }
             characterName.text = character?.name
             idLabel.text! += String(character!.id)

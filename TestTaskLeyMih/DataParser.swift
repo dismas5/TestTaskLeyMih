@@ -4,7 +4,7 @@ class DataParser {
     
     init() {
         JsonLink = ""
-        pagesAmount = 0
+        pagesAmount = 1
         //TODO: Get information about pages automatically, not by entering Int number
     }
     

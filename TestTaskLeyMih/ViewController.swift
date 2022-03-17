@@ -66,30 +66,30 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 }
                 continue
             }
-            
+            let searchValue = searchBarText[1].lowercased()
             switch searchBarText[0].lowercased() {
             case "name":
-                if character.name.lowercased().contains(searchBarText[1].lowercased()) {
+                if character.name.lowercased().contains(searchValue) {
                     self.characters.append(character)
                 }
             case "status":
-                if character.status.lowercased().contains(searchBarText[1].lowercased()) {
+                if character.status.lowercased().contains(searchValue) {
                     self.characters.append(character)
                 }
             case "species":
-                if character.species.lowercased().contains(searchBarText[1].lowercased()) {
+                if character.species.lowercased().contains(searchValue) {
                     self.characters.append(character)
                 }
             case "type":
-                if character.type.lowercased().contains(searchBarText[1].lowercased()) {
+                if character.type.lowercased().contains(searchValue) {
                     self.characters.append(character)
                 }
             case "gender":
-                if character.gender.lowercased() == searchBarText[1].lowercased() {
+                if character.gender.lowercased() == searchValue {
                     self.characters.append(character)
                 }
             case "created":
-                if character.created.lowercased().contains(searchBarText[1].lowercased()) {
+                if character.created.lowercased().contains(searchValue) {
                     self.characters.append(character)
                 }
             default:
@@ -110,6 +110,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
         if characterToSegue != nil {
             destination.character = characterToSegue
+            destination.image = images[characterToSegue!]
         }
     }
 }
@@ -146,7 +147,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     //This is required to get amount of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if characters == copiedCharacters {
+        if characters.count == copiedCharacters.count {
             return images.count
         }
         return loadedImages
