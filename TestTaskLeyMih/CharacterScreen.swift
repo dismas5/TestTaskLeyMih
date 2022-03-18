@@ -26,7 +26,13 @@ class CharacterScreen: UIViewController {
             idLabel.text! += String(character.id)
             statusLabel.text! += character.status
             speciesLabel.text! += character.species
-            typeLabel.text! += character.type
+            
+            if character.type == "" {
+                typeLabel.isHidden = true
+            } else {
+                typeLabel.text! += character.type
+            }
+            
             genderLabel.text! += character.gender
             
             expandButton.addTarget(self, action: #selector(expandEpisodes), for: .touchDown)
