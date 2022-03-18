@@ -132,7 +132,7 @@
                                 <rect key="frame" x="44" y="454" width="340" height="384"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZXg-Ws-Vgf">
-                                        <rect key="frame" x="0.0" y="0.0" width="296" height="228"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="296" height="269"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Id: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vli-zO-25m">
                                                 <rect key="frame" x="0.0" y="0.0" width="296" height="24"/>
@@ -170,20 +170,19 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR0-Cc-ATA">
+                                                <rect key="frame" x="0.0" y="204" width="296" height="31"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="(show)"/>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xs-Go-oZi">
-                                                <rect key="frame" x="0.0" y="204" width="296" height="24"/>
+                                                <rect key="frame" x="0.0" y="245" width="296" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR0-Cc-ATA">
-                                        <rect key="frame" x="259" y="164" width="81" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="(show)"/>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ZXg-Ws-Vgf" firstAttribute="top" secondItem="98d-FW-yTc" secondAttribute="top" id="Cgu-M5-MIl"/>

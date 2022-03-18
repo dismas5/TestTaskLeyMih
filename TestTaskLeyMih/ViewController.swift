@@ -92,6 +92,14 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 if character.created.lowercased().contains(searchValue) {
                     self.characters.append(character)
                 }
+            case "origin":
+                if character.origin.name.lowercased().contains(searchValue) {
+                    self.characters.append(character)
+                }
+            case "location":
+                if character.location.name.lowercased().contains(searchValue) {
+                    self.characters.append(character)
+                }
             default:
                 break
             }

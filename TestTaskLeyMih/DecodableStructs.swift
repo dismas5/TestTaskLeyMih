@@ -9,7 +9,13 @@ struct ApiInfo: Decodable {
 }
 
 struct Character: Decodable, Hashable {
-    //TODO: Add origin and location
+    static func == (lhs: Character, rhs: Character) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
     
     let id: Int
     let name: String
@@ -17,6 +23,8 @@ struct Character: Decodable, Hashable {
     let species: String
     let type: String
     let gender: String
+    let origin: Location
+    let location: Location
     let image: URL
     let episode: [URL]
     let url: URL
@@ -26,4 +34,9 @@ struct Character: Decodable, Hashable {
 struct RawData: Decodable {
     let info: ApiInfo
     let results: [Character]
+}
+
+struct Location: Codable {
+    let name: String
+    let url: String
 }
