@@ -35,7 +35,7 @@ class DataParser {
     }
 
     func parseData() {
-        var url = URL(string: "https://rickandmortyapi.com/api/character/?page=1")
+        var url = URL(string: JsonLink)
         var page: Int = 1
 
         while url != nil {

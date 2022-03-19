@@ -218,7 +218,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             
             DispatchQueue.global().async { [self] in
                 while i <= end && i < characters.count {
-                    print("Pic \(i) with id \(characters[i].id)")
+                    print("Pic \(i): \(characters[i].name)")
                     let data = try? Data(contentsOf: characters[i].image)
                     images[characters[i]] = UIImage(data: data!)
                     
