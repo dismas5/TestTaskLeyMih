@@ -2,39 +2,49 @@ import Foundation
 
 class DataParser {
     
-    init() {
-        JsonLink = ""
-        pagesAmount = 1
-        //TODO: Get information about pages automatically, not by entering Int number
-    }
-    
-    init(link: String, pages: Int) {
+    init(link: String) {
         JsonLink = link
-        pagesAmount = pages
     }
     
     public var characters: [Character] = [Character]()
-    private var pagesAmount: Int
-    private var JsonLink: String
+    private var pagesAmount: Int = 1
+    private var JsonLink: String = ""
     
     func getCharacters() -> [Character] {
         return characters
     }
     
-    func parseData() {
-        for i in 1...self.pagesAmount {
-            if let url = URL(string: self.JsonLink + "?page=\(i)") {
-                URLSession.shared.dataTask(with: url) { [self] data, _, error in
-                    if let data = data {
-                    do {
-                        characters += try JSONDecoder().decode(RawData.self, from: data).results
-                        print("Page \(i) exported successfully!")
-                    } catch {
-                        print("Error: \(error)")
-                    }
-                    }
-                }.resume()
+    func download(_ url: URL, _ i: Int, completion: @escaping (URL?)->()) {
+        let sem = DispatchSemaphore(value: 0)
+        var rawData: RawData?
+        URLSession.shared.dataTask(with: url) { [self] data, _, error in
+            defer { sem.signal() }
+            if let data = data {
+            do {
+                rawData = try JSONDecoder().decode(RawData.self, from: data)
+                characters += rawData!.results
+                print("Page \(i) exported successfully!")
+            } catch {
+                print("Error: \(error)")
             }
+            }
+        }.resume()
+        
+        sem.wait(timeout: .distantFuture)
+        completion(rawData!.info.next)
+    }
+
+    func parseData() {
+        var url = URL(string: "https://rickandmortyapi.com/api/character/?page=1")
+        var page: Int = 1
+
+        while url != nil {
+            download(url!, page) { link in
+                url = link
+            }
+
+            page += 1
         }
+        print("Parsing is ready")
     }
 }
