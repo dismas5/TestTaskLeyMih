@@ -4,7 +4,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let parser = DataParser(link: "https://rickandmortyapi.com/api/character/")
+    let characterParser = DataParser<Character>(link: "https://rickandmortyapi.com/api/character/")
+    let locationParser = DataParser<Location>(link: "https://rickandmortyapi.com/api/location")
     
     var loadingView: LoadingBarView?
     var characterToSegue: Character?
@@ -21,10 +22,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         //idk what does this line mean but without it characters upload slowier
         collectionView.collectionViewLayout.invalidateLayout()
-        parser.parseData()
-        characters = parser.getCharacters()
+        characterParser.parseData()
+        characters = characterParser.getCharacters()
         copiedCharacters = characters
-
+        locationParser.parseData()
         loadData()
     }
     

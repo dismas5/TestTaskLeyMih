@@ -37,7 +37,7 @@ class CharacterScreen: UIViewController {
             
             expandButton.addTarget(self, action: #selector(expandEpisodes), for: .touchDown)
             for episode in character.episode {
-                episodesLabel.text! += "\n\(episode)"
+                episodesLabel.text! += "\(episode)\n"
             }
             
             createdLabel.text! += character.created
@@ -52,12 +52,6 @@ class CharacterScreen: UIViewController {
     }
     
     @objc func expandEpisodes() {
-        if expandButton.titleLabel!.text! == "(show)" {
-            episodesLabel.numberOfLines = 0
-            expandButton.setTitle("(hide)", for: .normal)
-            return
-        }
-        episodesLabel.numberOfLines = 1
-        expandButton.setTitle("(show)", for: .normal)
+        episodesLabel.isHidden = !episodesLabel.isHidden
     }
 }
