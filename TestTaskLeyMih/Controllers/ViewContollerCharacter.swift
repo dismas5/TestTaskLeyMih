@@ -41,12 +41,6 @@ class CharacterScreen: UIViewController {
             }
             
             createdLabel.text! += character.created
-
-//            print("List of episodes:")
-//            for episode in character.episode {
-//                print(episode)
-//            }
-//
         }
         
     }
