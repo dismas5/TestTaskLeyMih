@@ -1,30 +1,30 @@
-import Foundation
 import UIKit
 
-class CharacterScreen: UIViewController {
-    
-    @IBOutlet weak var characterPicture: UIImageView!
-    @IBOutlet weak var characterName: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var speciesLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var genderLabel: UILabel!
-    @IBOutlet weak var episodesLabel: UILabel!
-    @IBOutlet weak var createdLabel: UILabel!
-    @IBOutlet weak var expandButton: UIButton!
+final class CharacterDetailViewController: UIViewController {
+    @IBOutlet private var characterPicture: UIImageView!
+    @IBOutlet private var characterName: UILabel!
+    @IBOutlet private var idLabel: UILabel!
+    @IBOutlet private var statusLabel: UILabel!
+    @IBOutlet private var speciesLabel: UILabel!
+    @IBOutlet private var typeLabel: UILabel!
+    @IBOutlet private var genderLabel: UILabel!
+    @IBOutlet private var episodesLabel: UILabel!
+    @IBOutlet private var createdLabel: UILabel!
+    @IBOutlet private var expandButton: UIButton!
     
     var character: Character?
     var image: UIImage?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         if let character = character {
             if let image = image {
                 characterPicture.image = image
             }
             characterName.text = character.name
             idLabel.text! += String(character.id)
-            statusLabel.text! += character.status
+            statusLabel.text! += character.status.rawValue
             speciesLabel.text! += character.species
             
             if character.type == "" {
@@ -33,7 +33,7 @@ class CharacterScreen: UIViewController {
                 typeLabel.text! += character.type
             }
             
-            genderLabel.text! += character.gender
+            genderLabel.text! += character.gender.rawValue
             
             expandButton.addTarget(self, action: #selector(expandEpisodes), for: .touchDown)
             for episode in character.episode {
@@ -45,7 +45,7 @@ class CharacterScreen: UIViewController {
         
     }
     
-    @objc func expandEpisodes() {
+    @objc private func expandEpisodes() {
         episodesLabel.isHidden = !episodesLabel.isHidden
     }
 }

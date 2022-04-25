@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XLA-RE-xQe">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Characters-->
+        <scene sceneID="NGm-ax-i02">
+            <objects>
+                <viewController id="XLA-RE-xQe" customClass="CharactersViewController" customModule="Restructure" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xAN-Ml-JuT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rz9-Lj-L0N">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="0oZ-3l-hqZ">
+                                    <size key="itemSize" width="130" height="170"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="XLA-RE-xQe" id="ylG-Of-tPt"/>
+                                    <outlet property="delegate" destination="XLA-RE-xQe" id="T0N-yC-HV6"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="55T-1n-TSy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Rz9-Lj-L0N" secondAttribute="trailing" id="0DR-vh-BI3"/>
+                            <constraint firstItem="Rz9-Lj-L0N" firstAttribute="top" secondItem="55T-1n-TSy" secondAttribute="top" id="EaC-Fv-FB3"/>
+                            <constraint firstItem="Rz9-Lj-L0N" firstAttribute="leading" secondItem="55T-1n-TSy" secondAttribute="leading" id="bcr-EL-J8b"/>
+                            <constraint firstAttribute="bottom" secondItem="Rz9-Lj-L0N" secondAttribute="bottom" id="mV3-A6-FH1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Characters" id="WiQ-Jm-zPV" userLabel="Nasdfa"/>
+                    <connections>
+                        <outlet property="collectionView" destination="Rz9-Lj-L0N" id="LN2-mZ-sIi"/>
+                        <segue destination="Pl5-nj-vnb" kind="show" identifier="segue" id="eIB-Cc-qpX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ThU-Gi-o5Y" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1195.7943925233644" y="72.570194384449252"/>
+        </scene>
+        <!--CharacterDetailViewController-->
+        <scene sceneID="II6-PE-Qb9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CharacterDetailViewController" referencedIdentifier="CharacterDetailViewController" id="Pl5-nj-vnb" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="C5W-Ip-KEb"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1T4-Vk-LRl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1825" y="72"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
